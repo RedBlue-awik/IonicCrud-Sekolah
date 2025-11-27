@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Penempatan Guru' : 'Tambah Penempatan Guru' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Batal</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="pengajarForm">
+    <ion-item>
+      <ion-label position="floating">Guru</ion-label>
+      <ion-select formControlName="id_guru">
+        <ion-select-option *ngFor="let g of dataGuru" [value]="g.id">{{ g.nama_guru }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mata Pelajaran</ion-label>
+      <ion-select formControlName="id_mapel">
+        <ion-select-option *ngFor="let m of dataMapel" [value]="m.id">{{ m.nama_mapel }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Kelas</ion-label>
+      <ion-select formControlName="id_kelas">
+        <ion-select-option *ngFor="let k of dataKelas" [value]="k.id">{{ k.tingkatan }} {{ k.nama_kelas }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="confirm()" [disabled]="!pengajarForm.valid">
+      <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+      Simpan
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

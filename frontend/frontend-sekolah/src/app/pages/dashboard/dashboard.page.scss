@@ -1,0 +1,28 @@
+.stat-card {
+  text-align: center;
+  background: var(--ion-color-light);
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  ion-card-content {
+    padding: 20px;
+  }
+
+  .stat-icon {
+    font-size: 3rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+  }
+
+  p {
+    margin: 5px 0 0 0;
+    color: var(--ion-color-medium);
+  }
+}

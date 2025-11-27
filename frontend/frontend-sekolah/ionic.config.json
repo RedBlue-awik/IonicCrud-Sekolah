@@ -1,0 +1,7 @@
+{
+  "name": "frontend-sekolah",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

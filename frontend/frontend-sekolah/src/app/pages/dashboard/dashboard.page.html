@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="authService.logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="3">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <ion-icon name="people-outline" class="stat-icon"></ion-icon>
+              <h2>{{ dashboardData.totalSiswa || 0 }}</h2>
+              <p>Total Siswa</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <ion-icon name="school-outline" class="stat-icon"></ion-icon>
+              <h2>{{ dashboardData.totalGuru || 0 }}</h2>
+              <p>Total Guru</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <ion-icon name="library-outline" class="stat-icon"></ion-icon>
+              <h2>{{ dashboardData.totalKelas || 0 }}</h2>
+              <p>Total Kelas</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <ion-icon name="book-outline" class="stat-icon"></ion-icon>
+              <h2>{{ dashboardData.totalMapel || 0 }}</h2>
+              <p>Total Mapel</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="display: flex; justify-content: space-between; align-items: center;"
+          >Data Penempatan Guru
+          <ion-button
+            (click)="tambahPengajar()"
+            style="width: 10px"
+            *ngIf="userRole === 'guru'"
+          >
+            <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item-sliding *ngFor="let p of dataPengajar">
+            <ion-item>
+              <ion-label>
+                <h3>{{ p.nama_guru }}</h3>
+                <p>{{ p.nama_mapel }} - {{ p.tingkatan }} {{ p.nama_kelas }}</p>
+              </ion-label>
+
+              <ion-buttons slot="end" *ngIf="userRole === 'guru'">
+                <ion-button
+                  fill="clear"
+                  color="primary"
+                  (click)="editPengajar(p)"
+                >
+                  <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                <ion-button
+                  fill="clear"
+                  color="danger"
+                  (click)="deletePengajar(p.id)"
+                >
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+            <ion-item-options side="end" *ngIf="userRole === 'guru'">
+              <ion-item-option color="primary" (click)="editPengajar(p)">
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="deletePengajar(p.id)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

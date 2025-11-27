@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Kelas' : 'Tambah Kelas' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Batal</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="kelasForm">
+    <ion-item>
+      <ion-label position="floating">Tingkatan</ion-label>
+      <ion-select formControlName="tingkatan">
+        <ion-select-option value="X">X</ion-select-option>
+        <ion-select-option value="XI">XI</ion-select-option>
+        <ion-select-option value="XII">XII</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nama Kelas</ion-label>
+      <ion-input type="text" formControlName="nama_kelas"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Jurusan</ion-label>
+      <ion-select formControlName="id_jurusan">
+        <ion-select-option *ngFor="let j of dataJurusan" [value]="j.id">{{ j.nama_jurusan }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="confirm()" [disabled]="!kelasForm.valid">
+      <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+      Simpan
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
